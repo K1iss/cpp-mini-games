@@ -28,6 +28,15 @@ void printChar(char *ch, UINT count, UINT x, UINT y)
     WriteConsoleOutputCharacterA(h, ch, count, pos, &unuse);
 }
 
+void setCursor(bool isVisible) //隐藏光标
+{
+    HANDLE fd = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cinfo;
+    cinfo.bVisible = isVisible;
+    cinfo.dwSize = 1;
+    SetConsoleCursorInfo(fd, &cinfo);
+}
+
 class Snake
 {
 private:
@@ -120,7 +129,6 @@ public:
         pair<int, int> head = body.front();
         body.push_front(make_pair(head.first + shiftX[dir],
                                   head.second + shiftY[dir]));
-        printChar("@", 1, body.front().first, body.front().second);
         if (body.front() == food)
         {
             point++;
@@ -131,6 +139,8 @@ public:
             printChar(" ", 1, body.back().first, body.back().second);
             body.pop_back();
         }
+        //应该先去尾再加头, 不然头所在是上一个尾时会出bug
+        printChar("@", 1, body.front().first, body.front().second);
         
     }
 
@@ -168,10 +178,12 @@ int main()
         else if (inputStr == "1")
         {
             system("cls");
+            setCursor(false);
             Snake mySnake;
             char key;
             while (true)
             {
+                Sleep(interval);
                 if (kbhit())
                 {
                     while (kbhit()) //获取用户最后输入的字符
@@ -187,11 +199,11 @@ int main()
                     {
                         printf("\n");
                     }
+                    setCursor(true);
                     printf("您已死亡! 分数 %d\n", mySnake.getPoint());
                     system("pause");
                     break;
                 }
-                Sleep(interval);
             }
         }
     }
