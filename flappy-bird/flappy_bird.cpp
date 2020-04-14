@@ -169,9 +169,9 @@ public:
                 }
             }
         }
-        if ((int)myBird.XY.first > 0 && (int)myBird.XY.first < N && (int)myBird.XY.second > 0 && (int)myBird.XY.second < M)
+        if ((int)(myBird.XY.first + 0.5) > 0 && (int)(myBird.XY.first + 0.5) < N && (int)(myBird.XY.second + 0.5) > 0 && (int)(myBird.XY.second + 0.5) < M)
         {
-            tmp[(int)myBird.XY.first][(int)myBird.XY.second] = '@';
+            tmp[(int)(myBird.XY.first + 0.5)][(int)(myBird.XY.second + 0.5)] = '@';
         }
         for (int i = 0; i <= N; i++)
         {
@@ -203,7 +203,7 @@ int main()
     {
         system("cls");
         string inputStr;
-        cout << "输入 start 开始游戏, 输入 exit 推出" << endl;
+        cout << "输入 start 开始游戏, 输入 exit 退出" << endl;
         cin >> inputStr;
         if (inputStr == "start")
         {
