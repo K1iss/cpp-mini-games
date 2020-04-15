@@ -5,6 +5,7 @@ c++实现各种小游戏
 
 语言标准：C++11
 
-1. [别踩白块](white-block/别踩白块.md)
-2. [贪吃蛇](snake/贪吃蛇.md)
-3. [Flappy Bird](flappy-bird/flappy_bird.md)
+1. [别踩白块](white-block/)
+2. [贪吃蛇](snake/)
+3. [Flappy Bird](flappy-bird/)
+4. [推箱子](boxman/)
